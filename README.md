@@ -1,2 +1,2 @@
 # gifplay
-render gif frame by frame support play、 pause、 toogle and more feature
+animated GIF player with canvas support for pausing, going frame-by-frame

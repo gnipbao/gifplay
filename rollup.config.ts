@@ -5,7 +5,7 @@ import typescript from '@rollup/plugin-typescript'
 import json from '@rollup/plugin-json';
 import _ from 'lodash';
 
-const pkg = require('./package.json')
+import * as pkg from './package.json'
 
 const libraryName = 'gifplay'
 

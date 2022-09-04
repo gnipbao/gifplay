@@ -12,7 +12,7 @@
   "author": "gniphuo <gnipbao@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gnipbao/gifplay.git"
+    "url": "git://github.com/gnipbao/gifplay.git"
   },
   "license": "MIT",
   "engines": {

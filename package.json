@@ -2,7 +2,11 @@
   "name": "gifplay",
   "version": "0.0.1",
   "description": "animated GIF player with canvas support for pausing, going frame-by-frame",
-  "keywords": [],
+  "keywords": [
+    "gif",
+    "player",
+    "frame"
+  ],
   "main": "dist/lib/gifplay.js",
   "module": "dist/lib/gifplay.js",
   "types": "dist/types/gifplay.d.ts",
@@ -12,9 +16,12 @@
   "author": "gniphuo <gnipbao@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git://github.com/gnipbao/gifplay.git"
+    "url": "https://github.com/gnipbao/gifplay.git"
   },
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gnipbao/gifplay/issues"
+  },
   "engines": {
     "node": ">=6.0.0"
   },

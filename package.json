@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "animated GIF player with canvas support for pausing, going frame-by-frame",
   "keywords": [],
-  "main": "dist/gifplay.umd.js",
-  "module": "dist/gifplay.es5.js",
-  "typings": "dist/types/gifplay.d.ts",
+  "main": "dist/lib/gifplay.js",
+  "module": "dist/lib/gifplay.js",
+  "types": "dist/types/gifplay.d.ts",
   "files": [
     "dist"
   ],

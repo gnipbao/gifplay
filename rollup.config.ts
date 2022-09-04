@@ -1,9 +1,9 @@
-import { nodeResolve } from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
-import sourcemaps from 'rollup-plugin-sourcemaps';
+import { nodeResolve } from '@rollup/plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
+import sourcemaps from 'rollup-plugin-sourcemaps'
 import typescript from '@rollup/plugin-typescript'
-import json from '@rollup/plugin-json';
-import _ from 'lodash';
+import json from '@rollup/plugin-json'
+import _ from 'lodash'
 
 import * as pkg from './package.json'
 
@@ -13,20 +13,18 @@ export default {
   input: `src/${libraryName}.ts`,
   output: [
     { file: pkg.main, name: _.camelCase(libraryName), format: 'umd', sourcemap: true },
-    { file: pkg.module, format: 'es', sourcemap: true },
+    { file: pkg.module, format: 'es', sourcemap: true }
   ],
   // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
-  external: [
-    'gifuct-js'
-  ],
+  external: ['gifuct-js'],
   watch: {
-    include: 'src/**',
+    include: 'src/**'
   },
   plugins: [
     // Allow json resolution
     json(),
     // Compile TypeScript files
-    typescript({ useTsconfigDeclarationDir: true }),
+    typescript(),
     // Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
     commonjs(),
     // Allow node_modules resolution, so you can use 'external' to control
@@ -35,6 +33,6 @@ export default {
     nodeResolve(),
 
     // Resolve source maps to the original source
-    sourcemaps(),
-  ],
+    sourcemaps()
+  ]
 }

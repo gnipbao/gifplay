@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <title>GifPlay demo</title>
+  </head>
+  <body>
+    <div>
+      <canvas id="c"></canvas>
+    </div>
+
+    <script type="module">
+      import GifPlay from '../dist/gifplay.es5.js'
+      // user canvas
+      const c = document.getElementById('c')
+      const ctx = c.getContext('2d')
+      const url = './horses.gif'
+      const player = new GifPlay(c, url)
+    </script>
+  </body>
+</html>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { parseGIF, decompressFrames } from 'gifuct-js'
 
 export class GifPlay {
@@ -7,9 +8,9 @@ export class GifPlay {
 
   loading = false
 
-  gifCanvas: HTMLCanvasElement = document.createElement('canvas')
+  canvas: HTMLCanvasElement | null
 
-  gifCtx: CanvasRenderingContext2D | null = this.gifCanvas.getContext('2d')
+  gifCtx: CanvasRenderingContext2D | null
 
   width = 0
 
@@ -25,22 +26,23 @@ export class GifPlay {
 
   imageData: any
 
-  src = ''
+  url = ''
 
   timerId = 0
 
   rid = 0
 
-  constructor(url: string, canvas: HTMLCanvasElement) {
-    this.src = url
-    this.gifCanvas = canvas
-    this.gifCtx = this.gifCanvas?.getContext('2d')
-    this.load(url)
+  constructor(canvas: HTMLCanvasElement | null, url: string) {
+    this.url = url
+    this.canvas = canvas
+    this.gifCtx = this.canvas?.getContext('2d') || null
+    this.load()
   }
 
-  load(url: string) {
+  load() {
+    if (!this.url) return
     this.loading = true
-    fetch(url)
+    fetch(this.url)
       .then(res => res.arrayBuffer())
       .then(buff => parseGIF(buff))
       .then(gif => {
@@ -48,6 +50,8 @@ export class GifPlay {
         this.width = this.frames[0].dims.width
         this.height = this.frames[0].dims.height
         this.loading = false
+
+        this.setWH()
         this.play()
       })
       .catch(() => {
@@ -55,6 +59,11 @@ export class GifPlay {
       })
   }
 
+  setWH() {
+    if (!this.canvas) return
+    this.canvas.width = this.width
+    this.canvas.height = this.height
+  }
   play() {
     if (this.frames.length < 1) {
       return
@@ -82,6 +91,7 @@ export class GifPlay {
       delay = this.frames[this.frameIndex].delay / this.playSpeed
 
       if (this.frames[this.frameIndex].disposalType === 2) {
+        console.log(this.width, this.height)
         this.gifCtx?.clearRect(0, 0, this.width, this.height)
       }
 
@@ -117,8 +127,8 @@ export class GifPlay {
     const tempCtx = tempCanvas.getContext('2d')
     if (
       !this.imageData ||
-      dims.width != this.imageData.width ||
-      dims.height != this.imageData.height
+      dims.width !== this.imageData.width ||
+      dims.height !== this.imageData.height
     ) {
       tempCanvas.width = dims.width
       tempCanvas.height = dims.height
@@ -128,12 +138,12 @@ export class GifPlay {
     this.imageData.data.set(this.frames[this.frameIndex].patch)
     // draw the patch back over the canvas
     tempCtx?.putImageData(this.imageData, 0, 0)
-
     this.gifCtx?.drawImage(tempCanvas, dims.left, dims.top)
   }
 
   render() {
     this._render()
+    // inject more effect
   }
 
   seek(time: number) {

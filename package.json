@@ -8,9 +8,9 @@
     "frame",
     "canvas"
   ],
-  "main": "dist/lib/gifplay.js",
-  "unpkg": "dist/lib/gifplay.js",
-  "module": "dist/lib/gifplay.js",
+  "main": "dist/gifplay.js",
+  "unpkg": "dist/gifplay.js",
+  "module": "dist/es/gifplay.js",
   "types": "dist/types/index.d.ts",
   "files": [
     "dist"

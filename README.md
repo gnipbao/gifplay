@@ -29,3 +29,5 @@ player.pause()
 - togglePlay
 - seek
 - seekFrame
+
+[detail docs](https://gnipbao.github.io/gifplay/classes/GifPlay.html)

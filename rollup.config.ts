@@ -1,5 +1,5 @@
 import { defineConfig } from 'rollup'
-import nodeResolve from '@rollup/plugin-node-resolve'
+import resolve from '@rollup/plugin-node-resolve'
 import babel from '@rollup/plugin-babel'
 import replace from '@rollup/plugin-replace'
 import typescript from 'rollup-plugin-typescript2'
@@ -22,15 +22,16 @@ export default defineConfig([
     output: { file: 'dist/lib/gifplay.js', format: 'cjs', indent: false },
     external,
     plugins: [
+      typescript({ useTsconfigDeclarationDir: true }),
       commonjs(),
-      nodeResolve({
+      resolve({
         extensions
       }),
-      typescript({ useTsconfigDeclarationDir: true }),
       babel({
         extensions,
         plugins: [
           ['@babel/plugin-transform-runtime'],
+          ['@babel/plugin-proposal-class-properties'],
           ['./scripts/mangleErrors.js', { minify: false }]
         ],
         babelHelpers: 'runtime'
@@ -44,15 +45,16 @@ export default defineConfig([
     output: { file: 'dist/es/gifplay.js', format: 'es', indent: false },
     external,
     plugins: [
+      typescript({ tsconfigOverride: noDeclarationFiles }),
       commonjs(),
-      nodeResolve({
+      resolve({
         extensions
       }),
-      typescript({ tsconfigOverride: noDeclarationFiles }),
       babel({
         extensions,
         plugins: [
           ['@babel/plugin-transform-runtime', { useESModules: true }],
+          ['@babel/plugin-proposal-class-properties'],
           ['./scripts/mangleErrors.js', { minify: false }]
         ],
         babelHelpers: 'runtime'
@@ -65,19 +67,22 @@ export default defineConfig([
     input: 'src/index.ts',
     output: { file: 'dist/es/gifplay.mjs', format: 'es', indent: false },
     plugins: [
-      commonjs(),
-      nodeResolve({
-        extensions
-      }),
       replace({
         preventAssignment: true,
         'process.env.NODE_ENV': JSON.stringify('production')
+      }),
+      commonjs(),
+      resolve({
+        extensions
       }),
       typescript({ tsconfigOverride: noDeclarationFiles }),
       babel({
         extensions,
         exclude: 'node_modules/**',
-        plugins: [['./scripts/mangleErrors.js', { minify: true }]],
+        plugins: [
+          ['@babel/plugin-proposal-class-properties'],
+          ['./scripts/mangleErrors.js', { minify: true }]
+        ],
         skipPreflightCheck: true,
         babelHelpers: 'bundled'
       }),
@@ -101,15 +106,18 @@ export default defineConfig([
       indent: false
     },
     plugins: [
+      typescript({ tsconfigOverride: noDeclarationFiles }),
       commonjs(),
-      nodeResolve({
+      resolve({
         extensions
       }),
-      typescript({ tsconfigOverride: noDeclarationFiles }),
       babel({
         extensions,
         exclude: 'node_modules/**',
-        plugins: [['./scripts/mangleErrors.js', { minify: false }]],
+        plugins: [
+          ['@babel/plugin-proposal-class-properties'],
+          ['./scripts/mangleErrors.js', { minify: false }]
+        ],
         babelHelpers: 'bundled'
       }),
       replace({
@@ -129,15 +137,18 @@ export default defineConfig([
       indent: false
     },
     plugins: [
+      typescript({ tsconfigOverride: noDeclarationFiles }),
       commonjs(),
-      nodeResolve({
+      resolve({
         extensions
       }),
-      typescript({ tsconfigOverride: noDeclarationFiles }),
       babel({
         extensions,
         exclude: 'node_modules/**',
-        plugins: [['./scripts/mangleErrors.js', { minify: true }]],
+        plugins: [
+          ['@babel/plugin-proposal-class-properties'],
+          ['./scripts/mangleErrors.js', { minify: true }]
+        ],
         skipPreflightCheck: true,
         babelHelpers: 'bundled'
       }),

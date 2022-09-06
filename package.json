@@ -1,6 +1,6 @@
 {
   "name": "gifplay-js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "animated GIF player with canvas support for pausing, going frame-by-frame",
   "keywords": [
     "gif",

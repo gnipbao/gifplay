@@ -5,7 +5,7 @@ animated GIF player with canvas support for pausing, going frame-by-frame
 ## Install
 
 ```js
-$ npm i gifplay-js -S
+$ npm i gifplay-js
 ```
 
 ## Usage

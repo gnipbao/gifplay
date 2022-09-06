@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "moduleResolution": "node",
-    "target": "es5",
+    "target": "esnext",
     "module":"esnext",
-    "lib": ["dom"],
+    "lib": ["dom","es2017"],
     "strict": true,
     "sourceMap": true,
     "declaration": true,
@@ -20,5 +20,6 @@
   },
   "include": [
     "src"
-  ]
+  ],
+  "exclude": ["node_modules", "dist"]
 }

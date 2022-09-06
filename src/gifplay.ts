@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { parseGIF, decompressFrames } from 'gifuct-js'
 
 export class GifPlay {
@@ -39,7 +38,7 @@ export class GifPlay {
     this.load()
   }
 
-  load() {
+  load(): void {
     if (!this.url) return
     this.loading = true
     fetch(this.url)
@@ -52,19 +51,18 @@ export class GifPlay {
         this.loading = false
 
         this.setWH()
-        this.play()
       })
       .catch(() => {
         this.loading = false
       })
   }
 
-  setWH() {
+  setWH(): void {
     if (!this.canvas) return
     this.canvas.width = this.width
     this.canvas.height = this.height
   }
-  play() {
+  play(): void {
     if (this.frames.length < 1) {
       return
     }
@@ -75,14 +73,14 @@ export class GifPlay {
     }
   }
 
-  pause() {
+  pause(): void {
     this.paused = true
     this.playing = false
     clearTimeout(this.timerId)
     cancelAnimationFrame(this.rid)
   }
 
-  _play() {
+  _play(): void {
     let delay
     const start = new Date().getTime()
     if (this.playSpeed === 0) {
@@ -113,7 +111,7 @@ export class GifPlay {
     }
   }
 
-  togglePlay() {
+  togglePlay(): void {
     if (this.paused || !this.playing) {
       this.play()
     } else {
@@ -141,12 +139,12 @@ export class GifPlay {
     this.gifCtx?.drawImage(tempCanvas, dims.left, dims.top)
   }
 
-  render() {
+  render(): void {
     this._render()
     // inject more effect
   }
 
-  seek(time: number) {
+  seek(time: number): void {
     clearTimeout(this.timerId)
     cancelAnimationFrame(this.rid)
     if (time < 0) time = 0
